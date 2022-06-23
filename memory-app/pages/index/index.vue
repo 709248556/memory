@@ -13,7 +13,7 @@
 			<text class="tit">答案</text>
 			<textarea v-model="memory.answer" maxlength="-1" placeholder="请输入答案"></textarea>
 		</view>
-		<view class="row b-b" v-show="show" id="answer">
+		<view class="row b-b" v-show="flag" id="answer">
 			<text class="tit">正确答案</text>
 			<textarea v-model="memory.rightAnswer" maxlength="-1"></textarea>
 		</view>

@@ -41,10 +41,7 @@
 				},
 				footprintList: [],
 				value: 0,
-				range: [{
-						value: 0,
-						text: "请选择类型"
-					}, {
+				range: [ {
 						value: 1,
 						text: "教资"
 					},

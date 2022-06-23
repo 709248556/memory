@@ -49,9 +49,6 @@
 				footprintList: [],
 				value: 0,
 				range: [{
-						value: 0,
-						text: "请选择类型"
-					}, {
 						value: 1,
 						text: "教资"
 					},
@@ -206,6 +203,7 @@
 
 		}
 	}
+
 	#answer {
 		display: flex;
 		align-items: center;
@@ -238,7 +236,7 @@
 
 		border-radius: 10upx;
 		box-shadow: 1px 2px 5px rgba(28, 42, 134, 0.4);
-		
+
 	}
 
 	#input {
@@ -251,7 +249,8 @@
 		align-items: center;
 	}
 
-	uni-input,textarea {
+	uni-input,
+	textarea {
 		border: 1px solid #DCDCDC;
 		width: 280px;
 		padding: 5px;
