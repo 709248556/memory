@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.memory.ExamHandleDao">
+
+    <sql id="Base_Column_List">
+        e.id AS id,
+        e.`type` AS `type`,
+        e.question AS question,
+        e.answer AS answer,
+        e.tip AS tip,
+        e.weight AS weight,
+        e.deleted AS deleted
+    </sql>
+
+    <insert id="insert" parameterType="com.example.memory.ExamDTO">
+        INSERT INTO tb_exam
+        (
+        `type`,
+        question,
+        answer,
+        tip,
+        weight,
+        creat_time,
+        deleted
+        )
+        VALUES
+        (
+        #{type},
+        #{question},
+        #{answer},
+        #{tip},
+        #{weight},
+        #{craetTime},
+        #{deleted}
+        )
+    </insert>
+
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM tb_exam
+        where id =  #{id}
+    </delete>
+
+    <update id="update"  parameterType="com.example.memory.ExamDTO">
+        update tb_exam
+        <set>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
+            </if>
+            <if test="type != null">
+                `type` = #{type},
+            </if>
+            <if test=" question != null and question !=''">
+                question =#{question},
+            </if>
+            <if test=" answer != null and answer !=''">
+                answer =#{answer},
+            </if>
+            <if test=" tip != null">
+                tip =#{tip},
+            </if>
+        </set>
+        where id =  #{id}
+    </update>
+
+    <select id="queryList" resultType="com.example.memory.ExamDTO" parameterType="com.example.memory.ExamQuery">
+        select <include refid="Base_Column_List"/> from tb_exam e
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="id != null">
+                AND e.id = #{id}
+            </if>
+            <if test="type != null">
+                AND e.type = #{type}
+            </if>
+            <if test="deleted != null">
+                AND e.deleted = #{deleted}
+            </if>
+            <if test="question != null and question !=''">
+                AND e.question =#{question}
+            </if>
+            <if test="answer != null and answer !=''">
+                AND e.answer =#{answer}
+            </if>
+            <if test="weight != null">
+                AND e.weight =#{weight}
+            </if>
+            <if test="notIdList != null and notIdList.size !=0">
+                AND e.id not in
+                <foreach item="item" index="index" collection="notIdList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="idList != null and idList.size !=0">
+                AND e.id in
+                <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+                order by FIELD(id,
+                <foreach item="item" index="index" collection="idList" open="" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </trim>
+    </select>
+
+    <select id="querySingle" resultType="com.example.memory.ExamDTO" parameterType="com.example.memory.ExamQuery">
+        select <include refid="Base_Column_List"/> from tb_exam e
+        where e.id =  #{id}
+    </select>
+
+    <select id="getSum" resultType="java.lang.Integer">
+        SELECT num FROM `tb_sum` WHERE id = 1
+    </select>
+</mapper>
