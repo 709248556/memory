@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "测验"
 			}
 		}, {
 			"path": "pages/index/edit",
@@ -28,8 +28,9 @@
 	"tabBar": {
 		"selectedColor": "#0000ff",
 		"color": "#C0C0C0",
+		"fontSize":"18px",
 		"list": [{
-			"text": "首页",
+			"text": "测验",
 			"pagePath": "pages/index/index"
 		}, {
 			"text": "编辑",
